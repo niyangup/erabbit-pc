@@ -1,21 +1,7 @@
 <template>
   <div class="container-header">
     <div class="container">
-      <h1>
-        <img src="@/assets/images/logo.png" alt="" class="logo">
-      </h1>
-      <ul>
-        <li>首页</li>
-        <li>居家</li>
-        <li>美食</li>
-        <li>美食</li>
-        <li>美食</li>
-        <li>美食</li>
-        <li>美食</li>
-        <li>美食</li>
-        <li>美食</li>
-        <li>美食</li>
-      </ul>
+      <AppHeaderNav/>
       <div class="input">
         <i class="iconfont icon-search"></i>
         <input type="text" placeholder="搜一搜">
@@ -31,8 +17,11 @@
 </template>
 
 <script>
+import AppHeaderNav from '@/components/header/AppHeaderNav'
+
 export default {
-  name: 'AppHeader'
+  name: 'AppHeader',
+  components: { AppHeaderNav }
 }
 </script>
 
@@ -45,24 +34,6 @@ export default {
   .container {
     display: flex;
     align-items: center;
-
-    .logo {
-      width: 200px;
-      height: @height;
-      object-fit: contain;
-    }
-
-    ul {
-      padding-left: 40px;
-      flex: 1;
-      display: flex;
-      font-size: 16px;
-      color: #333;
-
-      li {
-        margin-right: 40px;
-      }
-    }
 
     .input {
       position: relative;
@@ -84,6 +55,7 @@ export default {
     }
 
     .cart {
+      margin-left: 16px;
       width: 50px;
       height: 32px;
       position: relative;

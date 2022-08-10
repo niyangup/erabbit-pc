@@ -12,7 +12,7 @@
 <script>
 import AppNavBar from '@/components/AppNavBar'
 import { useStore } from 'vuex'
-import AppHeader from '@/components/AppHeader'
+import AppHeader from '@/components/header/AppHeader'
 import AppFooter from '@/components/AppFooter'
 
 export default {
