@@ -1,10 +1,9 @@
 <template>
+  <AppHeaderSticky></AppHeaderSticky>
   <AppNavBar></AppNavBar>
   <AppHeader></AppHeader>
   <div class="main">
     <router-view></router-view>
-    <button @click="login">登录</button>
-    <button @click="logout">退出</button>
   </div>
   <AppFooter></AppFooter>
 </template>
@@ -14,36 +13,21 @@ import AppNavBar from '@/components/AppNavBar'
 import { useStore } from 'vuex'
 import AppHeader from '@/components/header/AppHeader'
 import AppFooter from '@/components/AppFooter'
+import AppHeaderSticky from '@/components/header/AppHeaderSticky'
 
 export default {
   name: 'Layout',
   components: {
+    AppHeaderSticky,
     AppHeader,
     AppNavBar,
     AppFooter
   },
   setup () {
     const store = useStore()
+    store.dispatch('category/getList')
 
-    function logout () {
-      store.commit('user/clearUser')
-    }
-
-    function login () {
-      store.commit('user/setUser', {
-        id: '1',
-        avatar: '1',
-        nickname: '123',
-        account: '2222',
-        mobile: '1231',
-        token: '12321'
-      })
-    }
-
-    return {
-      logout,
-      login
-    }
+    return {}
   }
 }
 </script>

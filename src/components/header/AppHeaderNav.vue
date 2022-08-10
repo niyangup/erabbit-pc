@@ -3,19 +3,19 @@
     <div class="logo"></div>
   </h1>
   <ul class="nav-list">
-    <li v-for="item in 5" :key="item" class="nav-item">
-      <a href="javascript:void(0)">
-        美食
-      </a>
+    <li v-for="item in categoryList" :key="item.id" class="nav-item">
+      <RouterLink :to="`/category/${item.id}`">
+        {{ item.name }}
+      </RouterLink>
       <div class="layer container">
         <ul class="category-list">
-          <li v-for="i in 3" :key="i">
-            <a href="javascript:void(0)">
+          <li v-for="i in item.children" :key="i.id">
+            <RouterLink :to="`/category/sub/${i.id}`">
               <div class="item">
-                <img src="../../assets/images/item.png" alt="" class="item-img">
-                <div class="item-title">宠物食品</div>
+                <img :src="i.picture" alt="" class="item-img">
+                <div class="item-title">{{ i.name }}</div>
               </div>
-            </a>
+            </RouterLink>
           </li>
         </ul>
       </div>
@@ -23,8 +23,18 @@
   </ul>
 </template>
 <script>
+import { computed } from 'vue'
+import { useStore } from 'vuex'
+
 export default {
-  name: 'AppHeaderNav'
+  name: 'AppHeaderNav',
+  setup () {
+    const store = useStore()
+    const categoryList = computed(function () {
+      return store.state.category.list
+    })
+    return { categoryList }
+  }
 }
 </script>
 <style scoped lang="less">
