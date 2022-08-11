@@ -9,6 +9,7 @@
   <HomeHot></HomeHot>
   <HomeBrand></HomeBrand>
   <HomeProduct></HomeProduct>
+  <HomeSpecial></HomeSpecial>
 </template>
 
 <script>
@@ -18,6 +19,7 @@ import HomeNew from '@/views/home/components/HomeNew'
 import HomeHot from '@/views/home/components/HomeHot'
 import HomeBrand from '@/views/home/components/HomeBrand'
 import HomeProduct from '@/views/home/components/HomeProduct'
+import HomeSpecial from '@/views/home/components/HomeSpecial'
 
 export default {
   name: 'Home',
@@ -25,10 +27,10 @@ export default {
     HomeProduct,
     HomeBrand,
     HomeHot,
-    // eslint-disable-next-line vue/no-unused-components
     HomeNew,
     HomeBanner,
-    HomeCategory
+    HomeCategory,
+    HomeSpecial
   }
 }
 </script>
