@@ -8,13 +8,15 @@ import { ref } from 'vue'
 
 export const useLazyData = (target, callback) => {
   const result = ref([])
-  const { stop } = useIntersectionObserver(target, ([{ isIntersecting }], observerElement) => {
+  const { stop } = useIntersectionObserver(target, ([{ isIntersecting }]) => {
     if (isIntersecting) {
       stop()
       callback().then(value => {
         result.value = value.result
       })
     }
+  }, {
+    threshold: 0
   })
 
   return result
