@@ -1,5 +1,5 @@
 <template>
-  <div class="app-header-sticky" :class="{show:yRef>=78}">
+  <div class="app-header-sticky" :class="{show:y>=78}">
     <div class="container">
       <AppHeaderNav/>
       <div class="right">
@@ -12,18 +12,15 @@
 
 <script>
 import AppHeaderNav from '@/components/header/AppHeaderNav'
-import { ref } from 'vue'
+import { useWindowScroll } from '@vueuse/core'
 
 export default {
   name: 'AppHeaderSticky',
   components: { AppHeaderNav },
   setup () {
-    const yRef = ref(0)
-    window.addEventListener('scroll', function () {
-      yRef.value = document.documentElement.scrollTop
-    })
+    const { y } = useWindowScroll()
 
-    return { yRef }
+    return { y }
   }
 }
 </script>
