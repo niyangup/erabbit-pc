@@ -1,5 +1,13 @@
 <template>
-  <div class="top-category">top-category</div>
+  <div class="top-category">
+    <div class="container">
+      <XtxBread>
+        <XtxBreadItem>首页</XtxBreadItem>
+        <XtxBreadItem>电器</XtxBreadItem>
+        <XtxBreadItem>空调</XtxBreadItem>
+      </XtxBread>
+    </div>
+  </div>
 </template>
 
 <script>
