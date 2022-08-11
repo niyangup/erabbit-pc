@@ -7,6 +7,7 @@
   </div>
   <HomeNew></HomeNew>
   <HomeHot></HomeHot>
+  <HomeBrand></HomeBrand>
 </template>
 
 <script>
@@ -14,10 +15,12 @@ import HomeCategory from '@/views/home/components/HomeCategory'
 import HomeBanner from '@/views/home/components/HomeBanner'
 import HomeNew from '@/views/home/components/HomeNew'
 import HomeHot from '@/views/home/components/HomeHot'
+import HomeBrand from '@/views/home/components/home-brand'
 
 export default {
   name: 'Home',
   components: {
+    HomeBrand,
     HomeHot,
     // eslint-disable-next-line vue/no-unused-components
     HomeNew,
