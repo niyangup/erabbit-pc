@@ -6,16 +6,18 @@
       </template>
       <div ref="target" style="position: relative;height: 426px;">
         <!-- 面板内容 -->
-        <ul v-if="goods.length" class="goods-list">
-          <li v-for="item in goods" :key="item.id">
-            <RouterLink :to="`/product/${item.id}`">
-              <img :src="item.picture" alt="">
-              <p class="name ellipsis">{{ item.name }}</p>
-              <p class="price">&yen;{{ item.price }}</p>
-            </RouterLink>
-          </li>
-        </ul>
-        <!--        <HomeSkeleton bg="#f0f9f4" v-else/>-->
+        <Transition name="fade">
+          <ul v-if="goods.length" class="goods-list">
+            <li v-for="item in goods" :key="item.id">
+              <RouterLink :to="`/product/${item.id}`">
+                <img :src="item.picture" alt="">
+                <p class="name ellipsis">{{ item.name }}</p>
+                <p class="price">&yen;{{ item.price }}</p>
+              </RouterLink>
+            </li>
+          </ul>
+          <HomeSkeleton bg="#f0f9f4" v-else/>
+        </Transition>
       </div>
     </HomePanel>
   </div>
@@ -25,11 +27,13 @@
 import HomePanel from '@/views/home/components/HomePanel'
 import { ref } from 'vue'
 import { findNew } from '@/api/home'
+import HomeSkeleton from '@/views/home/components/HomeSkeleton'
 
 export default {
   name: 'HomeNew',
   components: {
-    HomePanel
+    HomePanel,
+    HomeSkeleton
   },
   setup () {
     const goods = ref([])
