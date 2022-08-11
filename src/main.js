@@ -4,8 +4,10 @@ import router from './router'
 import store from './store'
 import 'normalize.css'
 import '@/assets/styles/common.less'
+import UI from './components/library/index.js'
 
 createApp(App)
   .use(store)
   .use(router)
+  .use(UI)
   .mount('#app')

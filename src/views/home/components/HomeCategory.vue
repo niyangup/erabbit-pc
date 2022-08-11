@@ -10,6 +10,11 @@
             }}
           </RouterLink>
         </template>
+        <template v-else>
+          <XtxSkeleton width="60px" height="16px" bg="rgba(255,255,255,0.2)"
+                       style="margin-right: 5px;"></XtxSkeleton>
+          <XtxSkeleton width="50px" height="16px" bg="rgba(255,255,255,0.2)"></XtxSkeleton>
+        </template>
 
       </li>
     </ul>
@@ -253,4 +258,20 @@ export default {
     }
   }
 }
+
+.xtx-skeleton {
+  animation: fade 1s linear infinite;
+}
+
+@keyframes fade {
+
+  from {
+    opacity: 0.2;
+  }
+  to {
+    opacity: 1;
+  }
+
+}
+
 </style>
