@@ -1,12 +1,23 @@
 <template>
   <div class="home-banner-container">
-    <img src="../../../assets/images/center-bg.png" alt="">
+    <XtxCarousel :sliders="slidersRef" autoPlay></XtxCarousel>
   </div>
 </template>
 
 <script>
+import { ref } from 'vue'
+import { findBanner } from '@/api/home'
+
 export default {
-  name: 'HomeBanner'
+  name: 'HomeBanner',
+  setup () {
+    const slidersRef = ref([])
+    findBanner().then(value => {
+      slidersRef.value = value.result
+    })
+
+    return { slidersRef }
+  }
 }
 </script>
 
@@ -19,6 +30,16 @@ export default {
     width: 100%;
     height: 100%;
     object-fit: contain;
+  }
+
+  .xtx-carousel {
+    ::v-deep .carousel-btn.prev {
+      left: 270px;
+    }
+
+    ::v-deep .carousel-indicator {
+      padding-left: 250px;
+    }
   }
 }
 

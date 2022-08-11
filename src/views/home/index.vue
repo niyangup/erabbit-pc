@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <div class="home-entry">
-      <HomeCategory></HomeCategory>
+      <HomeCategory class="home-category"></HomeCategory>
       <HomeBanner></HomeBanner>
     </div>
   </div>
@@ -24,6 +24,10 @@ export default {
 @height: 500px;
 .home-entry {
   height: @height;
+
+  .home-category {
+    z-index: 100;
+  }
 }
 
 </style>
