@@ -114,19 +114,15 @@ export default {
 .sub-filter {
   background: #fff;
   padding: 25px;
-
   .item {
     display: flex;
     line-height: 40px;
-
     .head {
       width: 80px;
       color: #999;
     }
-
     .body {
       flex: 1;
-
       a {
         margin-right: 36px;
         transition: all .3s;
@@ -139,7 +135,6 @@ export default {
       }
     }
   }
-
   .xtx-skeleton {
     padding: 10px 0;
   }

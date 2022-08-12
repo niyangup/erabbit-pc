@@ -2,10 +2,10 @@
   <div class="sub-category">
     <div class="container">
       <SubBread></SubBread>
-      <SubFilter></SubFilter>
+      <SubFilter @filter-change="filterChange"></SubFilter>
       <div class="goods-list">
         <!-- 排序 -->
-        <SubSort/>
+        <SubSort @sort-change="sortChange"/>
         <!-- 列表 -->
         <ul>
           <li v-for="goods in goodList" :key="goods.id">
@@ -40,7 +40,7 @@ export default {
     const loading = ref(false)
     const finished = ref(false)
     const goodList = ref([])
-    const reqParams = {
+    let reqParams = {
       page: 1,
       pageSize: 20,
       categoryId: null
@@ -67,11 +67,28 @@ export default {
       }
     })
 
+    const sortChange = (sortParams) => {
+      finished.value = false
+      reqParams = { ...reqParams, ...sortParams }
+      reqParams.page = 1
+      goodList.value = []
+    }
+
+    const filterChange = (filterParams) => {
+      finished.value = false
+      // 合并请求参数，保留之前参数
+      reqParams = { ...reqParams, ...filterParams }
+      reqParams.page = 1
+      goodList.value = []
+    }
+
     return {
       loading,
       finished,
+      goodList,
       getData,
-      goodList
+      sortChange,
+      filterChange
     }
   }
 

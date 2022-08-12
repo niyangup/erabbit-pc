@@ -23,6 +23,7 @@ import { reactive } from 'vue'
 
 export default {
   name: 'SubSort',
+  emits: ['sort-change'],
   setup (props, { emit }) {
     const sortParams = reactive({
       inventory: false,
