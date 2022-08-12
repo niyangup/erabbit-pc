@@ -3,6 +3,7 @@ import Layout from '@/views/Layout'
 import Home from '@/views/home'
 import TopCategory from '@/views/category/index'
 import SubCategory from '@/views/category/sub'
+import Goods from '@/views/goods'
 
 const routes = [
   {
@@ -21,6 +22,10 @@ const routes = [
       {
         path: '/category/sub/:id',
         component: SubCategory
+      },
+      {
+        path: '/product/:id',
+        component: Goods
       }
     ]
   }
