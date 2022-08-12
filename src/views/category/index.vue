@@ -65,7 +65,7 @@ export default {
 
     const subList = ref([])
     watch(() => route.params.id, (value) => {
-      if (value) {
+      if (value && `/category/${value}` === route.path) {
         findTopCategory(route.params.id).then(value => {
           subList.value = value.result.children
         })
