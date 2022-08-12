@@ -17,7 +17,21 @@
         <XtxBreadItem v-if="goods">{{ goods.name }}</XtxBreadItem>
       </XtxBread>
       <!-- 商品信息 -->
-      <div class="goods-info"></div>
+      <div class="goods-info">
+        <div class="media">
+          <GoodsImage :images="goods.mainPictures"/>
+          <GoodsSales/>
+        </div>
+        <div class="spec">
+          <GoodsName :goods="goods"/>
+          <!-- sku组件 skuId="1369155865461919746" 测试选中 -->
+          <GoodsSku :goods="goods" @change="changeSku"/>
+          <!-- 数量选择组件 -->
+          <XtxNumbox label="数量" v-model="num" :max="goods.inventory"/>
+          <!-- 按钮组件 -->
+          <XtxButton @click="insertCart()" type="primary" style="margin-top:20px">加入购物车</XtxButton>
+        </div>
+      </div>
       <!-- 商品推荐 -->
       <GoodsRelevant/>
       <!-- 商品详情 -->
@@ -41,11 +55,18 @@ import GoodsRelevant from '@/views/goods/components/GoodsRelevant'
 import { nextTick, ref, watch } from 'vue'
 import { useRoute } from 'vue-router'
 import { findGoods } from '@/api/product'
+import GoodsImage from '@/views/goods/components/goods-image'
+import GoodsSales from '@/views/goods/components/goods-sales'
+import GoodsName from '@/views/goods/components/goods-name'
 
 export default {
   name: 'XtxGood',
   components: {
-    GoodsRelevant
+    GoodsRelevant,
+    GoodsImage,
+    GoodsSales,
+    GoodsName
+    // GoodsSku
   },
   setup () {
     const goods = useGoods()
@@ -75,6 +96,18 @@ const useGoods = () => {
 .goods-info {
   min-height: 600px;
   background: #fff;
+  display: flex;
+
+  .media {
+    width: 580px;
+    height: 600px;
+    padding: 30px 50px;
+  }
+
+  .spec {
+    flex: 1;
+    padding: 30px 30px 30px 0;
+  }
 }
 
 .goods-footer {
