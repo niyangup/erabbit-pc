@@ -40,7 +40,7 @@
           <!-- 商品+评价 -->
           <GoodsTabs></GoodsTabs>
           <!-- 注意事项 -->
-          <div class="goods-warn"></div>
+          <GoodsWarn></GoodsWarn>
         </div>
         <!-- 24热榜+专题推荐 -->
         <div class="goods-aside">
@@ -65,10 +65,12 @@ import GoodsSku from '@/views/goods/components/GoodsSku'
 import { useStore } from 'vuex'
 import GoodsTabs from '@/views/goods/components/GoodsTabs'
 import GoodsHot from '@/views/goods/components/GoodsHot'
+import GoodsWarn from '@/views/goods/components/GoodsWarn'
 
 export default {
   name: 'XtxGood',
   components: {
+    GoodsWarn,
     GoodsTabs,
     GoodsRelevant,
     GoodsImage,

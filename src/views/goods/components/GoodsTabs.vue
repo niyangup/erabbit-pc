@@ -13,13 +13,23 @@
         href="javascript:;"
       >商品评价<span>({{ goods.commentCount }})</span></a>
     </nav>
+
+    <KeepAlive>
+      <component :is="activeName"></component>
+    </KeepAlive>
   </div>
 </template>
 <script>
 import { inject, ref } from 'vue'
+import GoodsDetial from '@/views/goods/components/GoodsDetial'
+import GoodsComment from '@/views/goods/components/GoodsComment'
 
 export default {
   name: 'GoodsTabs',
+  components: {
+    GoodsDetial,
+    GoodsComment
+  },
   setup () {
     // activeName的值：GoodsDetial  GoodsComment
     const activeName = ref('GoodsDetial')
