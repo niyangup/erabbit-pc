@@ -38,12 +38,15 @@
       <div class="goods-footer">
         <div class="goods-article">
           <!-- 商品+评价 -->
-          <div class="goods-tabs"></div>
+          <GoodsTabs></GoodsTabs>
           <!-- 注意事项 -->
           <div class="goods-warn"></div>
         </div>
         <!-- 24热榜+专题推荐 -->
-        <div class="goods-aside"></div>
+        <div class="goods-aside">
+          <GoodsHot/>
+          <GoodsHot :type="2"/>
+        </div>
       </div>
     </div>
   </div>
@@ -60,15 +63,19 @@ import GoodsSales from '@/views/goods/components/GoodsSales'
 import GoodsName from '@/views/goods/components/GoodsName'
 import GoodsSku from '@/views/goods/components/GoodsSku'
 import { useStore } from 'vuex'
+import GoodsTabs from '@/views/goods/components/GoodsTabs'
+import GoodsHot from '@/views/goods/components/GoodsHot'
 
 export default {
   name: 'XtxGood',
   components: {
+    GoodsTabs,
     GoodsRelevant,
     GoodsImage,
     GoodsSales,
     GoodsName,
-    GoodsSku
+    GoodsSku,
+    GoodsHot
   },
   setup () {
     const goods = useGoods()
