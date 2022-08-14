@@ -33,7 +33,7 @@
         </div>
       </div>
       <!-- 商品推荐 -->
-      <GoodsRelevant/>
+      <GoodsRelevant :goodsId="goods.id"/>
       <!-- 商品详情 -->
       <div class="goods-footer">
         <div class="goods-article">
@@ -58,6 +58,7 @@ import { findGoods } from '@/api/product'
 import GoodsImage from '@/views/goods/components/goods-image'
 import GoodsSales from '@/views/goods/components/goods-sales'
 import GoodsName from '@/views/goods/components/goods-name'
+import GoodsSku from '@/views/goods/components/goods-sku'
 
 export default {
   name: 'XtxGood',
@@ -65,8 +66,8 @@ export default {
     GoodsRelevant,
     GoodsImage,
     GoodsSales,
-    GoodsName
-    // GoodsSku
+    GoodsName,
+    GoodsSku
   },
   setup () {
     const goods = useGoods()
