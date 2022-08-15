@@ -4,6 +4,7 @@ import Home from '@/views/home'
 import TopCategory from '@/views/category/index'
 import SubCategory from '@/views/category/sub'
 import Goods from '@/views/goods'
+import Login from '@/views/login'
 
 const routes = [
   {
@@ -28,6 +29,10 @@ const routes = [
         component: Goods
       }
     ]
+  },
+  {
+    path: '/login',
+    component: Login
   }
 ]
 

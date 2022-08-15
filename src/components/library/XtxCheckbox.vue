@@ -17,7 +17,6 @@ export default {
       default: false
     }
   },
-  emits: ['change'],
   setup (props, { emit }) {
     const checked = ref(false)
     const changeChecked = () => {

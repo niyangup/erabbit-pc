@@ -8,11 +8,13 @@
               <i class="iconfont icon-user">{{ profile.account }}</i>
             </a>
           </li>
-          <li><a href="javascript:void(0)">退出登录</a></li>
+          <li><a @click="logout">退出登录</a></li>
         </template>
 
         <template v-else>
-          <li><a href="javascript:void(0)">请先登录</a></li>
+          <li>
+            <RouterLink to="/login">请先登录</RouterLink>
+          </li>
           <li><a href="javascript:void(0)">免费注册</a></li>
         </template>
 
@@ -33,6 +35,7 @@
 <script>
 import { useStore } from 'vuex'
 import { computed } from 'vue'
+import { useRouter } from 'vue-router'
 
 export default {
   name: 'AppNavBar',
@@ -41,8 +44,17 @@ export default {
     const profile = computed(function () {
       return store.state.user.profile
     })
+
+    const router = useRouter()
+    const logout = () => {
+      store.commit('user/setUser', {})
+      // 清空购物车
+      store.commit('cart/setCart', [])
+      router.push('/login')
+    }
     return {
-      profile
+      profile,
+      logout
     }
   }
 }

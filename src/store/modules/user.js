@@ -21,6 +21,10 @@ export default {
     },
     clearUser (state) {
       state.profile = {}
+    },
+    // 修改回跳地址
+    setRedirectUrl (state, url) {
+      state.redirectUrl = url
     }
   }
 }
