@@ -66,6 +66,7 @@ import { useStore } from 'vuex'
 import GoodsTabs from '@/views/goods/components/GoodsTabs'
 import GoodsHot from '@/views/goods/components/GoodsHot'
 import GoodsWarn from '@/views/goods/components/GoodsWarn'
+import Message from '@/components/library/Message'
 
 export default {
   name: 'XtxGood',
@@ -128,10 +129,13 @@ export default {
           isEffective: true,
           count: num.value
         }).then(() => {
-          // Message({ type: 'success', text: '加入购物车成功' })
+          Message({
+            type: 'success',
+            text: '加入购物车成功'
+          })
         })
       } else {
-        // Message({ text: '请选择完整规格' })
+        Message({ text: '请选择完整规格' })
       }
     }
 

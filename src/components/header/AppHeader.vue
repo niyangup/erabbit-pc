@@ -7,10 +7,7 @@
         <input type="text" placeholder="搜一搜">
       </div>
 
-      <div class="cart">
-        <i class="iconfont icon-cart"></i>
-        <span class="count">0</span>
-      </div>
+      <AppHeaderCart/>
     </div>
   </div>
 
@@ -18,10 +15,14 @@
 
 <script>
 import AppHeaderNav from '@/components/header/AppHeaderNav'
+import AppHeaderCart from '@/components/AppHeaderCart'
 
 export default {
   name: 'AppHeader',
-  components: { AppHeaderNav }
+  components: {
+    AppHeaderNav,
+    AppHeaderCart
+  }
 }
 </script>
 

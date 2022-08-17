@@ -1,5 +1,5 @@
 import { createVNode, render } from 'vue'
-import XtxMessage from './xtx-message.vue'
+import XtxMessage from './XtxMessage.vue'
 
 // DOM容器
 const div = document.createElement('div')
@@ -14,18 +14,17 @@ export default ({
   text
 }) => {
   // 渲染组件
-  // 1. 导入消息提示组件
-  // 2. 将消息提示组件编译为虚拟节点(dom节点)
+  // 将消息提示组件编译为虚拟节点(dom节点)
   // createVNode(组件,属性对象（props）)
   const vnode = createVNode(XtxMessage, {
     type,
     text
   })
-  // 3. 准备一个装载消息提示组件的DOM容器
-  // 4. 将虚拟节点渲染再容器中
+  // 准备一个装载消息提示组件的DOM容器
+  // 将虚拟节点渲染再容器中
   // render(虚拟节点,DOM容器)
   render(vnode, div)
-  // 5. 3s后销毁组件
+  // 3s后销毁组件
   clearTimeout(timer)
   timer = setTimeout(() => {
     render(null, div)

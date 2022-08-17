@@ -48,27 +48,16 @@ export default {
   mutations: {
     // 加入购物车
     insertCart (state, payload) {
-      // 约定加入购物车字段必须和后端保持一致 payload对象 的字段
-      // 它们是：id skuId name attrsText picture price nowPrice selected stock count isEffective
-      // 插入数据规则：
-      // 1. 先找下是否有相同商品
-      // 2. 如果有相同的商品，查询它的数量，累加到payload上，再保存最新位置，原来商品需要删除
-      // 3. 如果没有相同商品，保存在最新位置即可
       const sameIndex = state.list.findIndex(goods => goods.skuId === payload.skuId)
       if (sameIndex > -1) {
         const count = state.list[sameIndex].count
         payload.count += count
-        // 删除原来
         state.list.splice(sameIndex, 1)
       }
-      // 追加新的
       state.list.unshift(payload)
     },
     // 修改购物车商品
     updateCart (state, goods) {
-      // goods 商品信息：nowPrice stock isEffective
-      // goods 商品对象的字段不固定，对象中有哪些字段就改哪些字段，字段的值合理才改
-      // goods 商品对象 必需有SKUID
       const updateGoods = state.list.find(item => item.skuId === goods.skuId)
       for (const key in goods) {
         if (goods[key] !== undefined && goods[key] !== null && goods[key] !== '') {
@@ -76,21 +65,16 @@ export default {
         }
       }
     },
-    // 删除购物车商品
     deleteCart (state, skuId) {
       const index = state.list.findIndex(item => item.skuId === skuId)
       state.list.splice(index, 1)
     },
-    // 设置购物车
     setCart (state, payload) {
-      // payload 为空数组，清空。为又值数组，设置。
       state.list = payload
     }
   },
   actions: {
-    // 合并购物车
     async mergeCart (ctx) {
-      // 准备合并的参数
       const cartList = ctx.state.list.map(goods => {
         return {
           skuId: goods.skuId,
@@ -99,7 +83,6 @@ export default {
         }
       })
       await mergeCart(cartList)
-      // 合并成功，清空本地购物车
       ctx.commit('setCart', [])
     },
     // 修改规格
@@ -109,11 +92,6 @@ export default {
     }) {
       return new Promise((resolve, reject) => {
         if (ctx.rootState.user.profile.token) {
-          // 已登录
-          // 1. 找出旧的商品信息
-          // 2. 删除旧商品数据
-          // 3. 原先商品的数量+新skuId
-          // 4. 添加新的商品
           const oldGoods = ctx.state.list.find(item => item.skuId === oldSkuId)
           deleteCart([oldGoods.skuId]).then(() => {
             return insertCart({
@@ -127,11 +105,6 @@ export default {
             resolve()
           })
         } else {
-          // 未登录
-          // 1. 找出旧的商品信息
-          // 2. 删除旧商品数据
-          // 3. 根据新的sku信息和旧的商品信息，合并成一条新的购物车商品数据
-          // 4. 添加新的商品
           const oldGoods = ctx.state.list.find(item => item.skuId === oldSkuId)
           ctx.commit('deleteCart', oldSkuId)
           const {
@@ -156,7 +129,6 @@ export default {
     batchDeleteCart (ctx, isClear) {
       return new Promise((resolve, reject) => {
         if (ctx.rootState.user.profile.token) {
-          // 已登录
           const ids = ctx.getters[isClear ? 'invalidList' : 'selectedList'].map(item => item.skuId)
           deleteCart(ids).then(() => {
             return findCart()
@@ -165,9 +137,6 @@ export default {
             resolve()
           })
         } else {
-          // 未登录
-          // 找出选中的商品列表，遍历调用删除的mutations
-          // isClear 未 true  删除失效商品列表，否则事选中的商品列表
           ctx.getters[isClear ? 'invalidList' : 'selectedList'].forEach(item => {
             ctx.commit('deleteCart', item.skuId)
           })
@@ -175,11 +144,9 @@ export default {
         }
       })
     },
-    // 全选与取消全选
     checkAllCart (ctx, selected) {
       return new Promise((resolve, reject) => {
         if (ctx.rootState.user.profile.token) {
-          // 已登录
           const ids = ctx.getters.validList.map(item => item.skuId)
           checkAllCart({
             selected,
@@ -202,12 +169,9 @@ export default {
         }
       })
     },
-    // 修改购物车（选中状态，数量）
     updateCart (ctx, payload) {
-      // payload 需要：必需有skuId  可能：selected  count
       return new Promise((resolve, reject) => {
         if (ctx.rootState.user.profile.token) {
-          // 已登录
           updateCart(payload).then(() => {
             return findCart()
           }).then(data => {
@@ -271,11 +235,6 @@ export default {
             resolve()
           })
         } else {
-          // 未登录
-          // 同时发送请求（有几个商品发几个请求）等所有请求成功，一并去修改本地数据。
-          // Promise.all(promise数组).then((dataList)=>{})  同时发请求，所有请求成功，得到所有成功结果
-          // Promise.resolve() Promise.reject() new Promise()
-          // Promise.race(promise数组).then((data)=>{}) 同时发请求，最快的请求成功，得到成功结果
           const promiseArr = ctx.state.list.map(goods => {
             return getNewCartGoods(goods.skuId)
           })
